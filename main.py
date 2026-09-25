@@ -1,7 +1,6 @@
 class TiendaOnline:
     # Sistema básico de gestión de inventario y ventas
 
-
     def __init__(self, inventario_inicial=None):
         self.inventario = inventario_inicial if inventario_inicial is not None else {}
         self.ventas_totales = 0.0
@@ -43,26 +42,26 @@ class TiendaOnline:
 
         # Registrar la venta
         self.ventas_totales += total_pedido
-        
+
         return total_pedido
 
     def limpiar_agotados(self):
-    """Elimina del inventario los productos con cantidad 0 o menor."""
-    for id_producto in list(self.inventario.keys()):
-        if self.inventario[id_producto]['cantidad'] <= 0:
-            del self.inventario[id_producto]
+        """Elimina del inventario los productos con cantidad 0 o menor."""
+        for id_producto in list(self.inventario.keys()):
+            if self.inventario[id_producto]['cantidad'] <= 0:
+                del self.inventario[id_producto]
 
 
 # --- CÓDIGO DE PRUEBA (Para que los estudiantes ejecuten) ---
 if __name__ == "__main__":
     print("Iniciando pruebas del sistema...")
-    
+
     # Prueba 1: Inicialización
     tienda1 = TiendaOnline()
     tienda1.agregar_producto("P01", "Teclado Mecánico", 150000, 5)
-    
+
     tienda2 = TiendaOnline()
-    # ¿Qué inventario tiene tienda2? 
+    # ¿Qué inventario tiene tienda2?
     print(f"Inventario tienda 2: {tienda2.inventario}")
 
     # Prueba 2: Procesar un pedido válido
@@ -71,14 +70,14 @@ if __name__ == "__main__":
         {'id_producto': 'P01', 'cantidad': 2},
         {'id_producto': 'P02', 'cantidad': 1}
     ]
-    
+
     total = tienda1.procesar_pedido(carrito, cupon_descuento="SENA2026")
     print(f"Total del pedido (con descuento): ${total}")
-    
+
     # Prueba 3: Comprar más de lo que hay
     carrito_excesivo = [{'id_producto': 'P02', 'cantidad': 10}]
     # tienda1.procesar_pedido(carrito_excesivo) # Descomentar para probar
-    
+
     # Prueba 4: Limpiar agotados
     tienda1.inventario["P01"]["cantidad"] = 0
     # tienda1.limpiar_agotados() # Descomentar para probar
