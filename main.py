@@ -28,10 +28,14 @@ class TiendaOnline:
             if cant_comprada > producto['cantidad']:
                 raise ValueError("No hay suficiente stock disponible")
 
-            
             # Actualizamos inventario y sumamos al total
-            producto['cantidad'] -= cant_comprada
             total_pedido += producto['precio'] * cant_comprada
+
+        for item in carrito:
+            id_prod = item['id_producto']
+            cant_comprada = item['cantidad']
+
+            self.inventario[id_prod]['cantidad'] -= cant_comprada
 
         # Aplicar descuento si el cupón es válido (20% de descuento)
         if cupon_descuento == "SENA2026":
